@@ -28,14 +28,11 @@ def draw3x3(row,column,bgclo):
             cells[(row+i+1, column+j+1)] = e 
 
 def draw9x9Grid():
-    color = "#D0FFFF"  # Corrected color
-    for rowNo in range(1, 10, 3):
-        for colNo in range(0, 9, 3):
-            draw3x3(rowNo, colNo, color)
-            if color == "#D0FFFF":
-                color = "#FFFFD0"  # Corrected color switch
-            else:
-                color = "#D0FFFF"
+    color1, color2 = "#B0B0B0", "#ffffff"
+    for row in range(1, 10, 3):
+        for col in range(0, 9, 3):
+            draw3x3(row, col, color1)
+            color1, color2 = color2, color1
 
          
          
@@ -62,12 +59,8 @@ def getValues():
         board.append(rows)
 
 
-btn = Button(root,command=getValues,text="Solve",width=10)
-btn.grid(row=20,column=1,columnspan=5,pady=20)
-
-
-btn = Button(root,command=clearValue,text="Clear",width=10)
-btn.grid(row=20,column=5,columnspan=5,pady=20)
+Button(root, command=getValues, text="Solve", font=("Arial", 12, "bold"), bg="#4CAF50", fg="white", width=10, relief=RAISED, bd=3).grid(row=20, column=1, columnspan=5, pady=20)
+Button(root, command=clearValue, text="Clear", font=("Arial", 12, "bold"), bg="#F44336", fg="white", width=10, relief=RAISED, bd=3).grid(row=20, column=5, columnspan=5, pady=20)
 
 draw9x9Grid()
 root.mainloop()
