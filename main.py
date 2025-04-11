@@ -19,7 +19,7 @@ def create_gui():
                 sub_row = []
                 for j in range(3):
                     cell_key = f'cell_{box_row*3+i}_{box_col*3+j}'
-                    cell = sg.Input('', size=(3, 1), font=('Arial', 16, 'bold'),
+                    cell = sg.Input('', size=(4, 1), font=('Arial', 30, 'bold'),
                                     justification='center', pad=(1, 1), key=cell_key,
                                     background_color='white', text_color='black', border_width=1)
                     sub_row.append(cell)
