@@ -1,16 +1,13 @@
 import FreeSimpleGUI as sg
 import time
 
-# Global variables
 grid = [[0] * 9 for _ in range(9)]
 speed = 0.05  # Default animation speed
 
-# Function to create the GUI
 def create_gui():
     sg.theme('LightGrey3')
     grid_layout = []
 
-    # Create the Sudoku grid
     for box_row in range(3):
         row_layout = []
         for box_col in range(3):
@@ -28,7 +25,6 @@ def create_gui():
             row_layout.append(sub_frame)
         grid_layout.append(row_layout)
 
-    # Add controls
     control_layout = [
         [sg.Text('Animation Speed:', font=('Arial', 12)), 
          sg.Slider(range=(0.01, 0.2), default_value=0.05, resolution=0.01, orientation='h', 
@@ -45,21 +41,18 @@ def create_gui():
 
     return sg.Window('Sudoku Solver', layout, finalize=True, margins=(20, 20))
 
-# Function to get the grid values
 def get_grid(window):
     for i in range(9):
         for j in range(9):
             val = window[f'cell_{i}_{j}'].get()
             grid[i][j] = int(val) if val.isdigit() else 0
 
-# Function to clear the grid
 def clear_grid(window):
     for i in range(9):
         for j in range(9):
             window[f'cell_{i}_{j}'].update('', background_color='white')
             grid[i][j] = 0
 
-# Function to load a sample puzzle
 def load_sample(window):
     sample = [
         [1, 3, 0, 0, 5, 0, 0, 0, 9],
@@ -79,7 +72,6 @@ def load_sample(window):
                 window[f'cell_{i}_{j}'].update(str(sample[i][j]), background_color='#e6f3ff')
                 grid[i][j] = sample[i][j]
 
-# Function to find the next empty cell
 def find_empty():
     for i in range(9):
         for j in range(9):
@@ -87,7 +79,6 @@ def find_empty():
                 return i, j
     return None
 
-# Function to check if a number is valid
 def is_valid(num, row, col):
     # Check row
     if num in grid[row]:
@@ -104,7 +95,6 @@ def is_valid(num, row, col):
                 return False
     return True
 
-# Function to solve the puzzle
 def solve(window):
     empty = find_empty()
     if not empty:
@@ -128,7 +118,6 @@ def solve(window):
 
     return False
 
-# Main program loop
 window = create_gui()
 
 while True:
